@@ -10,7 +10,7 @@
 
 import React from 'react';
 import {
-  StyleSheet, Text, View,
+  StyleSheet,
 } from 'react-native';
 
 import { NavigationContainer } from '@react-navigation/native';
