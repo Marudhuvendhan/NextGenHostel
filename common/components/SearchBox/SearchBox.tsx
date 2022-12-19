@@ -7,6 +7,7 @@ import {
     StyleSheet,
     TextInput
 } from 'react-native';
+import { Searchbar } from 'react-native-paper';
 
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
@@ -18,20 +19,18 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 
 const SearchBox: React.FC = () => {
 
-    const searchHostels = () => {
+    const [searchQuery, setSearchQuery] = React.useState('');
 
-    }
-    
+    const onChangeSearch = (query: string) => setSearchQuery(query);
+
     return (
         <View>
             <View style={styles.searchSection}>
-                <TextInput
-                    style={styles.input}
-                    placeholder="search..."
-                    onChangeText={searchHostels}
-                    underlineColorAndroid="transparent"
+                <Searchbar
+                    placeholder="Search"
+                    onChangeText={onChangeSearch}
+                    value={searchQuery}
                 />
-                <Icon style={styles.searchIcon} name="search" size={20} color="grey" />
             </View>
         </View>
     );
@@ -43,23 +42,8 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between',
         alignItems: 'center',
         backgroundColor: '#fff',
-        borderColor: 'grey',
-        borderWidth: 2,
         height: 50,
-        borderRadius: 50,
-        padding: 10,
         margin: 10,
-    },
-    searchIcon: {
-        padding: 0,
-    },
-    input: {
-        flex: 1,
-        paddingTop: 10,
-        paddingRight: 10,
-        paddingBottom: 10,
-        paddingLeft: 0,
-        height: 50,
     },
 });
 

@@ -3,7 +3,6 @@ import React from 'react';
 import {
   Text,
   View,
-  Button,
   StyleSheet,
   Image,
   ScrollView,
@@ -14,9 +13,12 @@ import {
   colorWhite,
   itemFontSize,
   primaryColor,
+  linkColor,
 } from '../../../styles/variables';
 
 import { RUPEE_SYMBOL } from '../../constants';
+
+import { Avatar, Button, Card, Title, Paragraph } from 'react-native-paper';
 
 export type Props = {
   navigation: {
@@ -69,30 +71,33 @@ const HostelCard: React.FC<Props> = ({ navigation }) => {
       <ScrollView style={styles.favouriteList} showsVerticalScrollIndicator={false}>
         {data.map(fav => {
           return (
-            <View style={styles.container} key={fav.name}>
-              <Image
-                style={styles.backgroundImg}
-                source={require('../../../assets/images/house.jpg')}
-              />
-              <View style={styles.details}>
-                <Text style={styles.hostleName}>{fav.name}</Text>
-                <Text style={styles.locality}>{fav.locality}</Text>
-                <Text style={styles.locality}>
-                  <Text>{RUPEE_SYMBOL}</Text>
-                  {fav.price}
-                  /day
-                </Text>
-                <Text style={styles.viewLink}>
-                  <Text
-                    onPress={() =>
-                      navigation.navigate('hostelDetails', { name: 'hostel Details' })
-                    }
-                  >
-                    Explore
+            <Card key={fav.name} style={styles.hostelCard}>
+              <View style={styles.container}>
+                <Image
+                  style={styles.backgroundImg}
+                  source={require('../../../assets/images/house.jpg')}
+                />
+                <View style={styles.details}>
+                  <Text style={styles.hostleName}>{fav.name}</Text>
+                  <Text style={styles.locality}>{fav.locality}</Text>
+                  <Text style={styles.locality}>
+                    <Text>{RUPEE_SYMBOL}</Text>
+                    {fav.price}
+                    /day
                   </Text>
-                </Text>
+                  <Text style={styles.viewLink}>
+                    <Text
+                      onPress={() =>
+                        navigation.navigate('hostelDetails', { name: 'hostel Details' })
+                      }
+                    >
+                      Explore
+                    </Text>
+                  </Text>
+                </View>
               </View>
-            </View>
+            </Card>
+
           );
         })}
       </ScrollView>
@@ -101,6 +106,14 @@ const HostelCard: React.FC<Props> = ({ navigation }) => {
 };
 
 const styles = StyleSheet.create({
+  hostelCard: {
+    marginBottom: 10,
+    marginTop: 10,
+    backgroundColor: colorWhite,
+    marginRight: 10,
+    marginLeft: 10,
+    paddingRight: 10,
+  },
   title: {
     fontSize: titleFontSize,
     marginBottom: 20,
@@ -111,22 +124,21 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
   },
   moreLink: {
-    color: primaryColor,
+    color: linkColor,
     marginTop: 10,
   },
   container: {
     flex: 1,
     flexDirection: 'row',
     alignItems: 'stretch',
-    borderColor: 'grey',
-    borderWidth: 1,
-    marginBottom: 20,
     height: 120,
   },
   backgroundImg: {
     width: 120,
     height: 120,
     flexGrow: 1,
+    borderTopLeftRadius: 5,
+    borderBottomLeftRadius: 5,
   },
   details: {
     padding: 10,
@@ -147,7 +159,7 @@ const styles = StyleSheet.create({
   viewLink: {
     textAlign: 'right',
     paddingRight: 10,
-    color: primaryColor,
+    color: linkColor,
   },
   card: {
     backgroundColor: 'white',

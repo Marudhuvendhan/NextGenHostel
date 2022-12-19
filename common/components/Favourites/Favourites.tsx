@@ -3,7 +3,6 @@ import React from 'react';
 import {
     Text,
     View,
-    Button,
     StyleSheet,
     Image,
     ScrollView,
@@ -14,9 +13,12 @@ import {
     colorWhite,
     itemFontSize,
     primaryColor,
+    linkColor,
 } from '../../../styles/variables';
 
 import CustomButton from '../Button';
+
+import { Avatar, Button, Card, Title, Paragraph } from 'react-native-paper';
 
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
@@ -58,21 +60,24 @@ const Favourites: React.FC<Props> = ({ navigation }) => {
             <ScrollView style={styles.favouriteList} horizontal showsHorizontalScrollIndicator={false}>
                 {data.map(fav => {
                     return (
-                        <View style={styles.container} key={fav.name}>
-                            <Image
-                                style={styles.backgroundImg}
-                                source={require('../../../assets/images/house.jpg')}
-                            />
-                            <View style={styles.details}>
-                                <Text style={styles.hostleName}>{fav.name}</Text>
-                                <Text style={styles.locality}>{fav.locality}</Text>
-                                <CustomButton
-                                    title="Book"
-                                    onPress={() =>
-                                        navigation.navigate('hostelDetails', { name: 'hostel Details' })
-                                    }
-                                />
-                            </View>
+                        <View style={styles.favCardWrapper}>
+                            <Card key={fav.name} style={styles.container}>
+                                <Card.Cover style={styles.backgroundImg} source={require('../../../assets/images/house.jpg')} />
+                                <Card.Content style={styles.details}>
+                                    <Text style={styles.hostleName}>{fav.name}</Text>
+                                    <Text style={styles.locality}>{fav.locality}</Text>
+                                </Card.Content>
+                                <Card.Actions style={styles.details}>
+                                    <Button
+                                        onPress={() =>
+                                            navigation.navigate('hostelDetails', { name: 'hostel Details' })
+                                        }
+                                        mode='contained'
+                                    >
+                                        Book
+                                    </Button>
+                                </Card.Actions>
+                            </Card>
                         </View>
                     );
                 })}
@@ -92,16 +97,12 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between',
     },
     moreLink: {
-        color: primaryColor,
+        color: linkColor,
         marginTop: 10,
     },
     container: {
-        flex: 1,
-        flexDirection: 'column',
         marginRight: 10,
         width: 240,
-        borderColor: 'grey',
-        borderWidth: 1,
     },
     backgroundImg: {
         width: '100%',
@@ -109,7 +110,7 @@ const styles = StyleSheet.create({
     },
     details: {
         padding: 10,
-        backgroundColor: colorWhite,
+        // backgroundColor: colorWhite,
     },
     favouriteList: {
 
@@ -124,6 +125,9 @@ const styles = StyleSheet.create({
         marginBottom: 10,
     },
     customBtn: {},
+    favCardWrapper: {
+        height: 280,
+    }
 });
 
 export default Favourites;
