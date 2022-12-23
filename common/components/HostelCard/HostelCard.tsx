@@ -15,10 +15,11 @@ import {
   primaryColor,
   linkColor,
 } from '../../../styles/variables';
+import Icon from 'react-native-vector-icons/MaterialIcons';
 
 import { RUPEE_SYMBOL } from '../../constants';
 
-import { Avatar, Button, Card, Title, Paragraph } from 'react-native-paper';
+import { useTheme, Button, Card, Title, Paragraph } from 'react-native-paper';
 
 export type Props = {
   navigation: {
@@ -55,6 +56,7 @@ const data = [
 ];
 
 const HostelCard: React.FC<Props> = ({ navigation }) => {
+  const theme = useTheme();
   return (
     <View>
       <View style={styles.header}>
@@ -65,7 +67,7 @@ const HostelCard: React.FC<Props> = ({ navigation }) => {
           }
           style={styles.moreLink}
         >
-          More
+          <Icon name="read-more" size={40} color={theme.colors.primary} />
         </Text>
       </View>
       <ScrollView style={styles.favouriteList} showsVerticalScrollIndicator={false}>
@@ -86,13 +88,16 @@ const HostelCard: React.FC<Props> = ({ navigation }) => {
                     /day
                   </Text>
                   <Text style={styles.viewLink}>
-                    <Text
+                    <Button
+                      mode="contained-tonal"
+                      icon="compass"
+                      contentStyle={{ flexDirection: 'row-reverse' }}
                       onPress={() =>
                         navigation.navigate('hostelDetails', { name: 'hostel Details' })
                       }
                     >
                       Explore
-                    </Text>
+                    </Button>
                   </Text>
                 </View>
               </View>
@@ -125,7 +130,6 @@ const styles = StyleSheet.create({
   },
   moreLink: {
     color: linkColor,
-    marginTop: 10,
   },
   container: {
     flex: 1,
@@ -141,7 +145,8 @@ const styles = StyleSheet.create({
     borderBottomLeftRadius: 5,
   },
   details: {
-    padding: 10,
+    paddingLeft: 10,
+    paddingTop: 10,
     backgroundColor: colorWhite,
     flexGrow: 4,
   },
@@ -153,12 +158,12 @@ const styles = StyleSheet.create({
     fontWeight: '600',
   },
   locality: {
-    marginBottom: 5,
+    // marginBottom: 5,
   },
   customBtn: {},
   viewLink: {
     textAlign: 'right',
-    paddingRight: 10,
+    paddingRight: 5,
     color: linkColor,
   },
   card: {
@@ -168,13 +173,6 @@ const styles = StyleSheet.create({
     paddingHorizontal: 5,
     width: '100%',
     marginVertical: 5,
-  },
-  shadowProp: {
-    shadowColor: '#171717',
-    shadowOffset: { width: -2, height: 4 },
-    shadowOpacity: 0.2,
-    shadowRadius: 3,
-    elevation: 20,
   },
 });
 

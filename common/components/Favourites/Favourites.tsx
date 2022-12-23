@@ -18,7 +18,7 @@ import {
 
 import CustomButton from '../Button';
 
-import { Avatar, Button, Card, Title, Paragraph } from 'react-native-paper';
+import { useTheme, Button, Card, Title, Paragraph } from 'react-native-paper';
 
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
@@ -44,6 +44,7 @@ const data = [
 ];
 
 const Favourites: React.FC<Props> = ({ navigation }) => {
+    const theme = useTheme();
     return (
         <View>
             <View style={styles.header}>
@@ -54,14 +55,14 @@ const Favourites: React.FC<Props> = ({ navigation }) => {
                     }
                     style={styles.moreLink}
                 >
-                    More
+                    <Icon name="read-more" size={40} color={theme.colors.primary} />
                 </Text>
             </View>
             <ScrollView style={styles.favouriteList} horizontal showsHorizontalScrollIndicator={false}>
                 {data.map(fav => {
                     return (
-                        <View style={styles.favCardWrapper}>
-                            <Card key={fav.name} style={styles.container}>
+                        <View style={styles.favCardWrapper} key={fav.name}>
+                            <Card style={styles.container}>
                                 <Card.Cover style={styles.backgroundImg} source={require('../../../assets/images/house.jpg')} />
                                 <Card.Content style={styles.details}>
                                     <Text style={styles.hostleName}>{fav.name}</Text>
@@ -98,7 +99,6 @@ const styles = StyleSheet.create({
     },
     moreLink: {
         color: linkColor,
-        marginTop: 10,
     },
     container: {
         marginRight: 10,
